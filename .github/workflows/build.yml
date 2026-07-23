@@ -24,6 +24,9 @@ jobs:
         with:
           channel: 'stable'
 
+      - name: Create Android Support Files
+        run: flutter create . --platforms=android --org com.gome.app
+
       - name: Get Dependencies
         run: flutter pub get
 
@@ -48,8 +51,8 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Create Windows Desktop Support
-        run: flutter create . --platforms=windows
+      - name: Create Windows Support Files
+        run: flutter create . --platforms=windows --org com.gome.app
 
       - name: Get Dependencies
         run: flutter pub get
