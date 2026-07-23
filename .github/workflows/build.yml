@@ -1,4 +1,4 @@
-name: Build Android APK and Windows EXE
+name: Build Windows EXE
 
 on:
   push:
@@ -6,39 +6,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-android:
-    name: Build Release APK
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Java JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-
-      - name: Create Android Support Files
-        run: flutter create . --platforms=android --org com.gome.app
-
-      - name: Get Dependencies
-        run: flutter pub get
-
-      - name: Build APK
-        run: flutter build apk --release
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: G-HOME-Android-APK
-          path: build/app/outputs/flutter-apk/app-release.apk
-
   build-windows:
     name: Build Release EXE
     runs-on: windows-latest
