@@ -1,84 +1,84 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyStreamingApp());
+  runApp(const GHomeApp());
 }
 
-class MyStreamingApp extends StatelessWidget {
-  const MyStreamingApp({super.key});
+class GHomeApp extends StatelessWidget {
+  const GHomeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Stream App',
-      theme: ThemeData.dark(),
-      home: const HomeScreen(),
+      title: 'G-HOME TV',
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xFF0D0D0D),
+        primaryColor: Colors.amber,
+      ),
+      home: const MainHomeScreen(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class MainHomeScreen extends StatefulWidget {
+  const MainHomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MainHomeScreen> createState() => _MainHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final List<Map<String, String>> movies = [
-    {"title": "Movie 1", "image": "https://via.placeholder.com/300x450"},
-    {"title": "Movie 2", "image": "https://via.placeholder.com/300x450"},
-    {"title": "Movie 3", "image": "https://via.placeholder.com/300x450"},
-    {"title": "Movie 4", "image": "https://via.placeholder.com/300x450"},
+class _MainHomeScreenState extends State<MainHomeScreen> {
+  final List<Map<String, String>> mediaList = [
+    {"title": "Hubstream Stream", "type": "hubstream", "url": "https://hubstream.art"},
+    {"title": "HDStream4U Stream", "type": "hdstream", "url": "https://hdstream4u.com"},
+    {"title": "YouTube Stream", "type": "youtube", "url": "https://youtube.com"},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('TV & Mobile Streaming')),
+      appBar: AppBar(
+        title: const Text('G-HOME ENTERPRISE STREAMING'),
+        backgroundColor: Colors.black87,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            childAspectRatio: 0.7,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
+            crossAxisCount: 3,
+            childAspectRatio: 1.2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
           ),
-          itemCount: movies.length,
+          itemCount: mediaList.length,
           itemBuilder: (context, index) {
-            // Focus widget TV remote (D-Pad) navigation handle karta hai
-            return Focus(
-              autofocus: index == 0,
-              builder: (context, hasFocus) {
-                return GestureDetector(
-                  onTap: () {
-                    // Video Play Logic Here
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[850],
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: hasFocus ? Colors.amber : Colors.transparent,
-                        width: 3,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        movies[index]["title"]!,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: hasFocus ? 18 : 14,
-                          fontWeight: hasFocus ? FontWeight.bold : FontWeight.normal,
-                        ),
-                      ),
+            // Using InkWell with automatic focus and highlight states for TV/Desktop/Mobile
+            return InkWell(
+              onTap: () {
+                // Handle Video Play Logic Here
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1F1F1F),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.amber,
+                    width: 2,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    mediaList[index]["title"]!,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             );
           },
         ),
