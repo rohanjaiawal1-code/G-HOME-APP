@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-android:
-    name: Build Release APK (TV & Mobile)
+    name: Build Release APK
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
