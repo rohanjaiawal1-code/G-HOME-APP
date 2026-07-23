@@ -10,55 +10,55 @@ jobs:
     name: Build Release APK
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code Repository
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Java Development Kit
+      - name: Setup Java JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Setup Flutter Engine
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
-      - name: Fetch Flutter Dependencies
+      - name: Get Dependencies
         run: flutter pub get
 
-      - name: Build Standalone APK
+      - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK Release Artifact
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: G-HOME-Android-TV-Mobile-APK
+          name: G-HOME-Android-APK
           path: build/app/outputs/flutter-apk/app-release.apk
 
   build-windows:
     name: Build Release EXE
     runs-on: windows-latest
     steps:
-      - name: Checkout Code Repository
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Flutter Engine
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
-      - name: Enable Desktop Support
-        run: flutter config --enable-windows-desktop
+      - name: Create Windows Desktop Support
+        run: flutter create . --platforms=windows
 
-      - name: Fetch Flutter Dependencies
+      - name: Get Dependencies
         run: flutter pub get
 
-      - name: Build Windows Executable
+      - name: Build Windows EXE
         run: flutter build windows --release
 
-      - name: Upload Windows EXE Artifact
+      - name: Upload EXE Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: G-HOME-Windows-PC-EXE
+          name: G-HOME-Windows-EXE
           path: build/windows/runner/Release/
