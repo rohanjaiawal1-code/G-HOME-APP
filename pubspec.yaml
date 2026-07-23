@@ -1,5 +1,5 @@
-name: my_tv_app
-description: A Universal Streaming App for Mobile, TV, and PC
+name: g_home_app
+description: G-HOME Streaming Application
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  webview_flutter: ^4.8.0
   cupertino_icons: ^1.0.6
 
 dev_dependencies:
